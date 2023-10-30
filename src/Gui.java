@@ -30,8 +30,6 @@ public class Gui extends JFrame implements ActionListener {
         newGameButton.addActionListener(this);
 
         int count = 1;
-        /*for (int i = 0; i < 15; i++) {
-            JButton numberButton = new JButton("" + (i + 1));*/
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 if (count<=15){
@@ -50,9 +48,6 @@ public class Gui extends JFrame implements ActionListener {
             }
         }
         randomizeButtons();
-
-
-        //numberButton.addActionListener(this::actionPerformed);
 
         pack();
         setLocationRelativeTo(null);
