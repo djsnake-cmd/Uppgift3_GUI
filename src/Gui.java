@@ -20,32 +20,31 @@ public class Gui extends JFrame implements ActionListener {
     public Gui(){
         this.add(panel);
         panel.add(northPanel,BorderLayout.NORTH);
-
         panel.add(southPanel, BorderLayout.SOUTH);
         southPanel.setLayout(new GridLayout(4, 4));
-        panel.add(southPanel,BorderLayout.SOUTH);
 
         buttons = new JButton[4][4];
-        southPanel.setLayout(new GridLayout(4,4));
 
         northPanel.add(newGameButton);
 
         newGameButton.addActionListener(this);
-        for (int i = 0; i < 15; i++) {
-            JButton numberButton = new JButton("" + (i + 1));
+
+        int count = 1;
+        /*for (int i = 0; i < 15; i++) {
+            JButton numberButton = new JButton("" + (i + 1));*/
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-
+                numberButton = new JButton("" + (i+1));
+                buttonList.add(numberButton);
+                southPanel.add(numberButton);
+                count++;
 
             }
-            numberButton = new JButton("" + (i+1));
-            buttonList.add(numberButton);
-            southPanel.add(numberButton);
         }
         randomizeButtons();
 
 
-        numberButton.addActionListener(this::actionPerformed);
+        //numberButton.addActionListener(this::actionPerformed);
 
         pack();
         setLocationRelativeTo(null);
