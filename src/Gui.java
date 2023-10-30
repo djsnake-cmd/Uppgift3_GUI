@@ -13,6 +13,7 @@ public class Gui extends JFrame implements ActionListener {
 
     JButton newGameButton = new JButton("New game");
     private JButton[][] buttons;
+    JButton emptyButton = new JButton("");
     ArrayList<JButton> buttonList = new ArrayList<>();
     JButton numberButton;
 
@@ -26,7 +27,6 @@ public class Gui extends JFrame implements ActionListener {
         buttons = new JButton[4][4];
 
         northPanel.add(newGameButton);
-
         newGameButton.addActionListener(this);
 
         int count = 1;
@@ -34,11 +34,18 @@ public class Gui extends JFrame implements ActionListener {
             JButton numberButton = new JButton("" + (i + 1));*/
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                numberButton = new JButton("" + (i+1));
-                buttonList.add(numberButton);
-                southPanel.add(numberButton);
-                count++;
+                if (count<=15){
+                    numberButton = new JButton("" + (count));
+                    buttons[i][j]= numberButton;
+                    buttonList.add(numberButton);
+                    southPanel.add(numberButton);
+                    numberButton.addActionListener(this);
+                    count++;
 
+                }else{
+                    buttons[i][j] = emptyButton;
+                    southPanel.add(emptyButton);
+                }
             }
         }
         randomizeButtons();
