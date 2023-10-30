@@ -5,7 +5,11 @@ import java.awt.event.ActionListener;
 
 public class Gui extends JFrame implements ActionListener {
 
-    JPanel panel = new JPanel(new GridLayout(4,4));
+    JPanel panel = new JPanel(new BorderLayout());
+    JPanel northPanel = new JPanel();
+    JPanel southPanel = new JPanel();
+
+    JButton newGameButton = new JButton("New game");
     JButton button1 = new JButton("1");
     JButton button2 = new JButton("2");
     JButton button3 = new JButton("3");
@@ -25,21 +29,28 @@ public class Gui extends JFrame implements ActionListener {
 
     public Gui(){
         this.add(panel);
-        panel.add(button1);
-        panel.add(button2);
-        panel.add(button3);
-        panel.add(button4);
-        panel.add(button5);
-        panel.add(button6);
-        panel.add(button7);
-        panel.add(button8);
-        panel.add(button9);
-        panel.add(button10);
-        panel.add(button11);
-        panel.add(button12);
-        panel.add(button13);
-        panel.add(button14);
-        panel.add(button15);
+        panel.add(northPanel,BorderLayout.NORTH);
+
+        panel.add(southPanel,BorderLayout.SOUTH);
+        southPanel.setLayout(new GridLayout(4,4));
+
+        northPanel.add(newGameButton);
+
+        southPanel.add(button1);
+        southPanel.add(button2);
+        southPanel.add(button3);
+        southPanel.add(button4);
+        southPanel.add(button5);
+        southPanel.add(button6);
+        southPanel.add(button7);
+        southPanel.add(button8);
+        southPanel.add(button9);
+        southPanel.add(button10);
+        southPanel.add(button11);
+        southPanel.add(button12);
+        southPanel.add(button13);
+        southPanel.add(button14);
+        southPanel.add(button15);
 
 
 
