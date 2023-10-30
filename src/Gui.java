@@ -15,25 +15,22 @@ public class Gui extends JFrame implements ActionListener {
     ArrayList<JButton> buttonList = new ArrayList<>();
 
 
-    public Gui(){
+    public Gui() {
         this.add(panel);
-        panel.add(northPanel,BorderLayout.NORTH);
+        panel.add(northPanel, BorderLayout.NORTH);
 
-        panel.add(southPanel,BorderLayout.SOUTH);
-        southPanel.setLayout(new GridLayout(4,4));
+        panel.add(southPanel, BorderLayout.SOUTH);
+        southPanel.setLayout(new GridLayout(4, 4));
 
         northPanel.add(newGameButton);
 
+        newGameButton.addActionListener(this);
         for (int i = 0; i < 15; i++) {
-            JButton numberButton = new JButton("" + (i+1));
+            JButton numberButton = new JButton("" + (i + 1));
             buttonList.add(numberButton);
-            //southPanel.add(numberButton);
         }
-        Collections.shuffle(buttonList);
+        randomizeButtons();
 
-        for (JButton button : buttonList){
-            southPanel.add(button);
-        }
 
         pack();
         setLocationRelativeTo(null);
@@ -43,7 +40,20 @@ public class Gui extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == newGameButton){
+            randomizeButtons();
+        }
+    }
 
+    private void randomizeButtons() {
+        southPanel.removeAll();
+        Collections.shuffle(buttonList);
+
+        for (JButton button : buttonList) {
+            southPanel.add(button);
+        }
+        southPanel.revalidate();
+        southPanel.repaint();
     }
 }
 
