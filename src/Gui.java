@@ -3,6 +3,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Gui extends JFrame implements ActionListener {
 
@@ -26,7 +27,12 @@ public class Gui extends JFrame implements ActionListener {
         for (int i = 0; i < 15; i++) {
             JButton numberButton = new JButton("" + (i+1));
             buttonList.add(numberButton);
-            southPanel.add(numberButton);
+            //southPanel.add(numberButton);
+        }
+        Collections.shuffle(buttonList);
+
+        for (JButton button : buttonList){
+            southPanel.add(button);
         }
 
         pack();
