@@ -14,6 +14,7 @@ Skapa en gridLayout med 4x4 rader och kolumner
 
 En textbox eller label som säger till när man klarat spelet
 Skapa en random-metod för “ny-knapp”-knappen
+Utveckla random-metoden så "tomma" rutan flyttas också
 En funktion när man klarat spelet som skriver ut i
 
 Kan man välja plats på en panel genom att skriva in koordinater?

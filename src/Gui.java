@@ -44,6 +44,7 @@ public class Gui extends JFrame implements ActionListener {
 
                 }else{
                     buttons[i][j] = emptyButton;
+                    buttonList.add(emptyButton);
                     southPanel.add(emptyButton);
                 }
             }
