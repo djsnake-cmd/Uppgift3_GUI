@@ -17,10 +17,12 @@ public class Gui extends JFrame implements ActionListener {
     ArrayList<JButton> buttonList = new ArrayList<>();
     JButton numberButton;
 
+    private Point emptyLocal = new Point();
 
-    public Gui(){
+
+    public Gui() {
         this.add(panel);
-        panel.add(northPanel,BorderLayout.NORTH);
+        panel.add(northPanel, BorderLayout.NORTH);
         panel.add(southPanel, BorderLayout.SOUTH);
         southPanel.setLayout(new GridLayout(4, 4));
 
@@ -28,19 +30,20 @@ public class Gui extends JFrame implements ActionListener {
 
         northPanel.add(newGameButton);
         newGameButton.addActionListener(this);
+        emptyButton.addActionListener(this);
 
         int count = 1;
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
-                if (count<=15){
+                if (count <= 15) {
                     numberButton = new JButton("" + (count));
-                    buttons[i][j]= numberButton;
+                    buttons[i][j] = numberButton;
                     buttonList.add(numberButton);
                     southPanel.add(numberButton);
                     numberButton.addActionListener(this);
                     count++;
 
-                }else{
+                } else {
                     buttons[i][j] = emptyButton;
                     buttonList.add(emptyButton);
                     southPanel.add(emptyButton);
@@ -57,17 +60,55 @@ public class Gui extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == newGameButton){
+        if (e.getSource() == newGameButton) {
             randomizeButtons();
+        } else {
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < 4; j++) {
+                    if (e.getSource() == buttons[i][j] && adjacent(i, j)) {
+                        swap(i, j);
+                        return;
+                    }
+                }
+            }
         }
+    }
+
+    private boolean adjacent(int x, int y) {
+        return Math.abs(x - emptyLocal.x) + Math.abs(y - emptyLocal.y) == 1;
+    }
+
+    private void swap(int x, int y) {
+        JButton temp = buttons[x][y];
+        buttons[x][y] = buttons[emptyLocal.x][emptyLocal.y];
+        buttons[emptyLocal.x][emptyLocal.y] = temp;
+
+        southPanel.removeAll();
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                southPanel.add(buttons[i][j]);
+            }
+
+        }
+        southPanel.revalidate();
+        southPanel.repaint();
+        emptyLocal.setLocation(x, y);
+
     }
 
     private void randomizeButtons() {
         southPanel.removeAll();
         Collections.shuffle(buttonList);
 
-        for (JButton button : buttonList) {
-            southPanel.add(button);
+        int index = 0;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                buttons[i][j] = buttonList.get(index++);
+                southPanel.add(buttons[i][j]);
+                if (buttons[i][j] == emptyButton) {
+                    emptyLocal.setLocation(i, j);
+                }
+            }
         }
         southPanel.revalidate();
         southPanel.repaint();
